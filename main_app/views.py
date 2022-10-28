@@ -1,6 +1,9 @@
 from django.shortcuts import redirect, render 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import ListView
+
+from .models import Game
 
 # Create your views here.
 def home(request):
@@ -19,3 +22,7 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
+
+class GameList(ListView):
+    model = Game
+    fields = '__all__'
