@@ -28,3 +28,5 @@ def signup(request):
 class GameList(ListView):
     model = Game
     fields = '__all__'
+
+    # jessica
