@@ -25,8 +25,7 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
-class GameList(ListView):
-    model = Game
-    fields = '__all__'
-
-    # jessica
+@login_required
+def games_index(request):
+  games = Game.objects.filter(user=request.user)
+  return render(request, 'games/games_index.html', {'games': games})

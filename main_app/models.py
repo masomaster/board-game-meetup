@@ -10,6 +10,7 @@ class Game (models.Model):
     difficulty_rating = models.IntegerField()
     genre = models.CharField(max_length=50)
     min_age = models.IntegerField(default=5)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
