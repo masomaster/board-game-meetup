@@ -29,3 +29,7 @@ def signup(request):
 def games_index(request):
   games = Game.objects.filter(user=request.user)
   return render(request, 'games/games_index.html', {'games': games})
+
+def games_detail(request, game_id):
+  game = Game.objects.get(id=game_id)
+  return render(request, 'games/games_detail.html', {'game': game})
