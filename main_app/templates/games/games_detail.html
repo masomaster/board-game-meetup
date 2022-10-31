@@ -11,6 +11,7 @@
         <p>Minimum Age: {{ game.min_age }}</p>
         <p>Difficulty Rating: {{ game.difficulty_rating }}</p>
         <p>Average Game Play: {{ game.avg_game_play }} minutes</p>
+        <p>Description: {{ game.description }}</p>
     </div>
     <div class="card-action">
         <a href="{% url 'games_update' game.id %}">Edit</a>
