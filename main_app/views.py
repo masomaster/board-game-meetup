@@ -67,8 +67,12 @@ class MeetingDetail(LoginRequiredMixin, DetailView):
 
 class MeetingCreate(LoginRequiredMixin, CreateView):
   model = Meeting
-  fields = '__all__'
+  fields = ['name', 'date', 'location', 'min_ppl', 'max_ppl']
 
 class MeetingUpdate(LoginRequiredMixin, UpdateView):
   model = Meeting
   fields = ['name', 'date', 'location', 'min_ppl', 'max_ppl']
+
+class MeetingDelete(LoginRequiredMixin, DeleteView):
+  model = Meeting
+  success_url = '/meetings/'

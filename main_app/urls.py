@@ -10,5 +10,9 @@ urlpatterns = [
     path('games/create/', views.GameCreate.as_view(), name='games_create'),
     path('games/<int:pk>/update/', views.GameUpdate.as_view(), name='games_update'),
     path('games/<int:pk>/delete/', views.GameDelete.as_view(), name='games_delete'),
-    path('meetings/', views.MeetingList.as_view(), name='meetings_index')
+    path('meetings/', views.MeetingList.as_view(), name='meetings_index'),
+    path('meetings/create/', views.MeetingCreate.as_view(), name='meetings_create'),
+    path('meetings/<int:pk>/', views.MeetingDetail.as_view(), name='meetings_detail'),
+    path('meetings/<int:pk>/update/', views.MeetingUpdate.as_view(), name='meeting_update'),
+    path('meetings/<int:pk>/delete/', views.MeetingDelete.as_view(), name='meeting_delete'),
 ]
