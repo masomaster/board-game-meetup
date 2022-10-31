@@ -11,6 +11,7 @@ class Game (models.Model):
     difficulty_rating = models.IntegerField(blank= True, null=True)
     genre = models.CharField(max_length=50, blank= True)
     min_age = models.IntegerField(default=5)
+    # meetings = models.ManyToManyField(Meeting)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=250, blank= True)
 
@@ -26,12 +27,15 @@ class Meeting(models.Model):
     location = models.CharField(max_length=100)
     min_ppl = models.IntegerField()
     max_ppl = models.IntegerField()
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
-    organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_created") # in form, automatically assign creator to this field
-    players = models.ManyToManyField(User, related_name="user_playing") # on form, automatically assign creator to this join table AND allow other users to click a "join" button that will add them to this join table
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, null = True)
+    organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_created", null = True) # in form, automatically assign creator to this field
+    players = models.ManyToManyField(User, related_name="user_playing", null = True) # on form, automatically assign creator to this join table AND allow other users to click a "join" button that will add them to this join table
 
     def __str__(self):
         return f"{self.name} on {self.date}"
+
+    def get_absolute_url(self):
+        return reverse('meetings_detail', kwargs={'pk': self.id})
 
     class Meta:
         ordering = ['name']

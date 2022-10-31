@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Meeting List</h1>
+
+{% for meeting in meetings_list %}
+  <a href="{% url 'meetings_detail' meeting.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ meeting.name }}</span>
+            <p>{{ meeting.date }}</p>
+            <p>{{ meeting.location }}</p>
+            <p>{{ meeting.organizer }}</p>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}
