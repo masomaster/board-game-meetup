@@ -1,15 +1,14 @@
+from types import MethodType
 from django.shortcuts import redirect, render 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import  CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
-from django.views.generic import ListView
-
-from .models import Game
+from .models import Game, Meeting
 
 # Create your views here.
 def home(request):
@@ -59,3 +58,17 @@ class GameUpdate(LoginRequiredMixin, UpdateView):
 class GameDelete(LoginRequiredMixin, DeleteView):
   model = Game
   success_url = '/games/'
+
+class MeetingList(LoginRequiredMixin, ListView):
+  model = Meeting
+  
+class MeetingDetail(LoginRequiredMixin, DetailView):
+  model = Meeting
+
+class MeetingCreate(LoginRequiredMixin, CreateView):
+  model = Meeting
+  fields = '__all__'
+
+class MeetingUpdate(LoginRequiredMixin, UpdateView):
+  model = Meeting
+  fields = ['name', 'date', 'location', 'min_ppl', 'max_ppl']
