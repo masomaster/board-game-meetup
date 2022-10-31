@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import  CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from main_app.forms import MeetingForm
 
 
 from .models import Game, Meeting
@@ -36,7 +37,8 @@ def games_index(request):
 @login_required
 def games_detail(request, game_id):
   game = Game.objects.get(id=game_id)
-  return render(request, 'games/games_detail.html', {'game': game})
+  meeting_form = MeetingForm()
+  return render(request, 'games/games_detail.html', {'game': game, 'form': meeting_form})
 
 class GameCreate(LoginRequiredMixin, CreateView):
   model = Game
@@ -61,7 +63,8 @@ class GameDelete(LoginRequiredMixin, DeleteView):
 
 class MeetingList(LoginRequiredMixin, ListView):
   model = Meeting
-  
+  fields = ['name', 'date', 'location', 'min_ppl', 'max_ppl']
+
 class MeetingDetail(LoginRequiredMixin, DetailView):
   model = Meeting
 
@@ -76,3 +79,14 @@ class MeetingUpdate(LoginRequiredMixin, UpdateView):
 class MeetingDelete(LoginRequiredMixin, DeleteView):
   model = Meeting
   success_url = '/meetings/'
+
+def create_meeting(request, game_id):
+  form = MeetingForm(request.POST)
+  print('this the request.POST', request.POST)
+  # print("this is the logged in user", form.instance.user)
+  if form.is_valid():
+    new_meeting = form.save(commit=False)
+    new_meeting.game_id = game_id
+    # new_meeting.user_id = form.instance.user
+    new_meeting.save()
+  return redirect('meetings_index') # send to detail page if this works

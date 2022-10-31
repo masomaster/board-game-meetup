@@ -23,7 +23,6 @@
           {% if user.is_authenticated %}
             <li><a href="/games">View All My Games</a></li>
             <li><a href="{% url 'games_create' %}">Add a Game</a></li>
-            <li><a href="{% url 'meetings_create' %}">Add a Meeting</a></li>
             <li><a href="/meetings">View All My Meetings</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}

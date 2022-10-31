@@ -16,6 +16,27 @@
         <a href="{% url 'games_update' game.id %}">Edit</a>
         <a href="{% url 'games_delete' game.id %}">Delete</a>
     </div>
+</div>  
+<h3>Creating a Meeting for {{ game.name }}</h3>
+<div class="card">
+    <div class="card-content">
+        <form action="{% url 'create_meeting' game.id %}" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Create Meeting" class="btn">
+        </form>
+    </div>
 </div>
+<script>
+    const dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+      format: 'yyyy-mm-dd',
+      defaultDate: new Date(),
+      setDefaultDate: true,
+      autoClose: true
+    });
+  </script>
 
 {% endblock %}
