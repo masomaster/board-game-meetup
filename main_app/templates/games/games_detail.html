@@ -12,6 +12,10 @@
         <p>Difficulty Rating: {{ game.difficulty_rating }}</p>
         <p>Average Game Play: {{ game.avg_game_play }} minutes</p>
     </div>
+    <div class="card-action">
+        <a href="{% url 'games_update' game.id %}">Edit</a>
+        <a href="{% url 'games_delete' game.id %}">Delete</a>
+    </div>
 </div>
 
 {% endblock %}
