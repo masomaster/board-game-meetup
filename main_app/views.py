@@ -68,6 +68,7 @@ class MeetingList(LoginRequiredMixin, ListView):
 class MeetingDetail(LoginRequiredMixin, DetailView):
   model = Meeting
 
+
 class MeetingCreate(LoginRequiredMixin, CreateView):
   model = Meeting
   fields = ['name', 'date', 'location', 'min_ppl', 'max_ppl']
@@ -82,11 +83,9 @@ class MeetingDelete(LoginRequiredMixin, DeleteView):
 
 def create_meeting(request, game_id):
   form = MeetingForm(request.POST)
-  print('this the request.POST', request.POST)
-  # print("this is the logged in user", form.instance.user)
   if form.is_valid():
     new_meeting = form.save(commit=False)
     new_meeting.game_id = game_id
-    # new_meeting.user_id = form.instance.user
+    new_meeting.organizer_id = request.user.id
     new_meeting.save()
   return redirect('meetings_index') # send to detail page if this works
