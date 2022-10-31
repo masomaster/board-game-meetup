@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Board Game Meetup</title>
+  <title>Board Meeting</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
@@ -15,13 +15,14 @@
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Board Game Meetup</a></li>
+          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Board Meeting</a></li>
         </ul>
         <ul class="right">
           <li><a href="/about">About</a></li>
           {% if user.is_authenticated %}
             <li><a href="/games">View All My Games</a></li>
             <li><a href="{% url 'games_create' %}">Add a Game</a></li>
+            <li><a href="/meetings">View All My Meetings</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
@@ -36,7 +37,7 @@
     {% endblock %}
   </main>
   <footer class="page-footer">
-    <div class="right">All Rights Reserved, &copy; 2022 Board Game Meetup &nbsp;</div>
+    <div class="right">All Rights Reserved, &copy; 2022 Board Meeting &nbsp;</div>
   </footer>
 </body>
 </html>
