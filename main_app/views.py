@@ -6,8 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import  CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from main_app.forms import MeetingForm
 
+from main_app.forms import MeetingForm
 
 from .models import Game, Meeting
 
@@ -68,7 +68,6 @@ class MeetingList(LoginRequiredMixin, ListView):
 class MeetingDetail(LoginRequiredMixin, DetailView):
   model = Meeting
 
-
 class MeetingCreate(LoginRequiredMixin, CreateView):
   model = Meeting
   fields = ['name', 'date', 'location', 'min_ppl', 'max_ppl']
@@ -81,6 +80,7 @@ class MeetingDelete(LoginRequiredMixin, DeleteView):
   model = Meeting
   success_url = '/meetings/'
 
+@login_required
 def create_meeting(request, game_id):
   form = MeetingForm(request.POST)
   if form.is_valid():
