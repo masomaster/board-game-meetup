@@ -34,6 +34,7 @@ def games_index(request):
   games = Game.objects.filter(user=request.user)
   return render(request, 'games/games_index.html', {'games': games})
 
+@login_required
 def games_detail(request, game_id):
   game = Game.objects.get(id=game_id)
   return render(request, 'games/games_detail.html', {'game': game})
@@ -48,3 +49,13 @@ class GameCreate(LoginRequiredMixin, CreateView):
     print('this got to view function')
     form.instance.user = self.request.user
     return super().form_valid(form)
+
+class GameUpdate(LoginRequiredMixin, UpdateView):
+  model = Game
+  fields = [
+    'name', 'min_player', 'max_player', 'avg_game_play', 'difficulty_rating', 'genre', 'min_age', 'description'
+  ]
+
+class GameDelete(LoginRequiredMixin, DeleteView):
+  model = Game
+  success_url = '/games/'
