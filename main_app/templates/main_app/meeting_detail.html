@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Meeting Details</h1>
+<h1>{{ meeting.name }}</h1>
 
 <div class="row">
   <div class="col s6 col-offset-3">
     <div class="card">
       <div class="card-content">
-        <span class="card-title">{{ meeting.name }}</span>
-            <p>{{ meeting.date }}</p>
-            <p>{{ meeting.location }}</p>
-            <p>{{ meeting.organizer }}</p>
+        <span class="card-title">Meeting Details</span>
+            <p>Game: {{ meeting.game }}</p>
+            <p>Meeting Date: {{ meeting.date }}</p>
+            <p>Location: {{ meeting.location }}</p>
+            <p>Organizer: {{ meeting.organizer }}</p>
+            <p>Minimum Players: {{ meeting.min_ppl }}</p>
+            <p>Maximum Players: {{ meeting.max_ppl }}</p>
       </div>
       <div class="card-action">
         <a href="{% url 'meeting_update' meeting.id %}">Edit</a>
@@ -18,5 +21,17 @@
       </div>
     </div>
   </div>
+  <div class="col s6 col-offset-3">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">Game Details</span>
+        <p>Average Game Play Time: {{meeting.game.avg_game_play}}</p>
+        <p>Difficulty Rating: {{meeting.game.difficulty_rating}}</p>
+        <p>Genre: {{meeting.game.genre}}</p>
+        <p>Minimum Age: {{meeting.game.min_age}}</p>
+        <p>Description: {{meeting.game.description}}</p>
+      </div>
+    </div>
+  </div>  
 </div>
 {% endblock %}
