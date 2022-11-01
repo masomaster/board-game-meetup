@@ -15,31 +15,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Raleway:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Board Meeting</a></li>
-        </ul>
-        <input id="menu-toggle" type="checkbox">
-        <label class="menu-button-container" for="menu-toggle">
-          <div class="menu-button"></div>
-        </label>
-        <ul class="right">
-          <li><a href="/about">About</a></li>
-          {% if user.is_authenticated %}
-            <li><a href="/games">View All My Games</a></li>
-            <li><a href="{% url 'games_create' %}">Add a Game</a></li>
-            <li><a href="/meetings">View All My Meetings</a></li>
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
-          {% else %}
-            <li><a href="{% url 'signup' %}">Sign Up</a></li>
-            <li><a href="{% url 'login' %}">Log In</a></li>
-          {% endif %}
-        </ul>
-      </div>
-    </nav>
-  </header>
+
+  <section class="top-nav">
+    <div id="title">
+      <a href="{% url 'home' %}">Board Meeting</a>
+    </div>
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+    <ul class="menu">
+      <li><a href="/about">About</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="/games">View All My Games</a></li>
+        <li><a href="{% url 'games_create' %}">Add a Game</a></li>
+        <li><a href="/meetings">View All My Meetings</a></li>
+        <li><a href="{% url 'logout' %}">Log Out</a></li>
+      {% else %}
+        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+        <li><a href="{% url 'login' %}">Log In</a></li>
+      {% endif %}
+    </ul>
+  </section>
+
   <main class="container">
     {% block content %}
     {% endblock %}
