@@ -6,8 +6,13 @@ body {
     box-sizing: border-box;
 }
 
+a {
+    color:#444;
+}
+
 h1, h3 {
     font-family: 'Playfair Display', serif;
+    color: white;
 }
 
 #home-body {
@@ -52,6 +57,7 @@ h1, h3 {
     color: #FFF;
     height: 50px;
     padding: 1em;
+    z-index: +2;
 }
 
 .top-nav a {
