@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Game (models.Model):
     name = models.CharField(max_length=50)
-    min_player = models.IntegerField()
-    max_player = models.IntegerField(blank=True, null=True)
+    min_player = models.IntegerField('Minimum # Players')
+    max_player = models.IntegerField('Maximum # Players', blank=True, null=True)
     avg_game_play = models.IntegerField()
     difficulty_rating = models.IntegerField(blank=True, null=True)
     genre = models.CharField(max_length=50, blank=True)
