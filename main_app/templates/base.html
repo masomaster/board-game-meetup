@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Raleway:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="navbar-fixed">
@@ -18,6 +21,10 @@
         <ul>
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Board Meeting</a></li>
         </ul>
+        <input id="menu-toggle" type="checkbox">
+        <label class="menu-button-container" for="menu-toggle">
+          <div class="menu-button"></div>
+        </label>
         <ul class="right">
           <li><a href="/about">About</a></li>
           {% if user.is_authenticated %}
