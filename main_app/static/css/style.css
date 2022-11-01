@@ -2,13 +2,22 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color: #EFD6AC;
+    background-color: #4C6663;
     box-sizing: border-box;
 }
 
+h1, h3 {
+    font-family: 'Playfair Display', serif;
+}
+
 #home-body {
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
-    background-image: url('./background.jpeg');
+    background-color: #222;
+    background-image: linear-gradient(90deg,
+    rgba(0,0,0, 0.75),
+    rgba(0,0,0,.2)), url(https://images.pexels.com/photos/776654/pexels-photo-776654.jpeg);
+    background-image: -webkit-linear-gradient(90deg,
+    rgba(0,0,0, 0.75),
+    rgba(0,0,0,.2)), url(https://images.pexels.com/photos/776654/pexels-photo-776654.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Raleway', sans-serif;
@@ -162,6 +171,7 @@ footer.page-footer {
     padding-top: 0;
     text-align: right;
     background-color: #183A37;
+    font-family: 'PT Sans', sans-serif;
 }  
 
 @media only screen and (min-width: 1024px) {
