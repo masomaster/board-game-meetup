@@ -2,20 +2,63 @@
 {% block content %}
 
 <div class="row">
-  <div class="col s6">
-    <h1>Meetings I've Joined</h1>
+  <div class="col s4">
+    <h3>Joined Meetings</h3>
   </div>
-  <div class="col s6">
-    <h1>Other Meetings</h1>
+  <div class="col s4">
+    <h3>Non-Joined Meetings</h3>
+  </div>
+  <div class="col s4">
+    <h3>My Meetings</h3>
   </div>
 </div>
+
+<!-- Change button to 'leave meeting' -->
 <div class="row">
-  <div class="col s6">
-    Here we will insert a filtered list from the view where meeting.players includes logged-in user's id
-    
+  <div class="col s4">
+    {% for meeting in joined_meetings %}
+    <a href="{% url 'meetings_detail' meeting.id %}">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{ meeting.name }}</span>
+          <p>Game: {{ meeting.game.name }}</p>
+          <p>Date: {{ meeting.date }}</p>
+          <p>Location: {{ meeting.location }}</p>
+          <p>Organizer: {{ meeting.organizer }}</p>
+          <hr>
+          <form action="{% url 'join_meeting' meeting.id %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Join Meeting" class="btn">
+          </form>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
   </div>
-  <div class="col s6">
-    {% for meeting in object_list %}
+  <div class="col s4">
+    {% for meeting in non_joined_meetings %}
+    <a href="{% url 'meetings_detail' meeting.id %}">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{ meeting.name }}</span>
+          <p>Game: {{ meeting.game.name }}</p>
+          <p>Date: {{ meeting.date }}</p>
+          <p>Location: {{ meeting.location }}</p>
+          <p>Organizer: {{ meeting.organizer }}</p>
+          <hr>
+          <form action="{% url 'join_meeting' meeting.id %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Join Meeting" class="btn">
+          </form>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+
+<!-- Change buttons to be 'edit' and 'delete' -->
+  <div class="col s4">
+    {% for meeting in my_meetings %}
     <a href="{% url 'meetings_detail' meeting.id %}">
       <div class="card">
         <div class="card-content">
