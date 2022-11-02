@@ -1,20 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Meeting List</h1>
-
-{% for meeting in object_list %}
-  <a href="{% url 'meetings_detail' meeting.id %}">
-    <div class="card">
+<div class="row">
+  <div class="col s6">
+    <h1>Meetings I've Joined</h1>
+  </div>
+  <div class="col s6">
+    <h1>Other Meetings</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col s6">
+    Here we will insert a filtered list from the view where meeting.players includes logged-in user's id
+    
+  </div>
+  <div class="col s6">
+    {% for meeting in object_list %}
+    <a href="{% url 'meetings_detail' meeting.id %}">
+      <div class="card">
         <div class="card-content">
-            <span class="card-title">{{ meeting.name }}</span>
-            <p>Game: {{ meeting.game.name }}</p>
-            <p>Date: {{ meeting.date }}</p>
-            <p>Location: {{ meeting.location }}</p>
-            <p>Organizer: {{ meeting.organizer }}</p>
+          <span class="card-title">{{ meeting.name }}</span>
+          <p>Game: {{ meeting.game.name }}</p>
+          <p>Date: {{ meeting.date }}</p>
+          <p>Location: {{ meeting.location }}</p>
+          <p>Organizer: {{ meeting.organizer }}</p>
+          <hr>
+          <form action="{% url 'join_meeting' meeting.id %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Join Meeting" class="btn">
+          </form>
         </div>
-    </div>
-  </a>
-{% endfor %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock %}
