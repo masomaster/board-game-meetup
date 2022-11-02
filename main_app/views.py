@@ -98,17 +98,11 @@ def join_meeting(request, meeting_id):
 
 def meetings_list(request):
   my_meetings = Meeting.objects.filter(organizer=request.user)
-  all_meetings = Meeting.objects.all()
-  
-  joined_meetings = Meeting.objects.all(players.include()request.user)
-  
-  joined_meetings = Meeting.objects.filter(id__in=request.user)
-
-  id_list = cat.toys.all().values_list('id')
-  toys_cat_doesnt_have = Toy.objects.exclude(id__in=id_list)
-
-  
+  # create available (non-joined) meetings 
+  non_joined_meetings = Meeting.objects.exclude(players__id=request.user.id)
+  joined_meetings = Meeting.objects.filter(players__id=request.user.id)  
   return render (request, 'meetings/meetings_index.html', {
     'my_meetings': my_meetings,
-    'all_meetings': all_meetings,
+    'non_joined_meetings': non_joined_meetings,
+    'joined_meetings': joined_meetings,
   })
