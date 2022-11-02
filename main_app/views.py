@@ -64,18 +64,14 @@ class GameDelete(LoginRequiredMixin, DeleteView):
   model = Game
   success_url = '/games/'
 
-class MeetingList(LoginRequiredMixin, ListView):
-  model = Meeting
-  fields = ['name', 'date', 'location', 'min_ppl', 'max_ppl']
+# class MeetingList(LoginRequiredMixin, ListView):
+#   model = Meeting
+
 
   # insert custom code to create and send a custom list of meetings that the user is a player in (also one that they're not in?)
 
 class MeetingDetail(LoginRequiredMixin, DetailView):
   model = Meeting
-
-class MeetingCreate(LoginRequiredMixin, CreateView):
-  model = Meeting
-  fields = ['name', 'date', 'location', 'min_ppl', 'max_ppl']
 
 class MeetingUpdate(LoginRequiredMixin, UpdateView):
   model = Meeting
@@ -99,3 +95,20 @@ def create_meeting(request, game_id):
 def join_meeting(request, meeting_id):
   Meeting.objects.get(id=meeting_id).players.add(request.user.id)
   return redirect('meetings_index') # send to detail page if this works
+
+def meetings_list(request):
+  my_meetings = Meeting.objects.filter(organizer=request.user)
+  all_meetings = Meeting.objects.all()
+  
+  joined_meetings = Meeting.objects.all(players.include()request.user)
+  
+  joined_meetings = Meeting.objects.filter(id__in=request.user)
+
+  id_list = cat.toys.all().values_list('id')
+  toys_cat_doesnt_have = Toy.objects.exclude(id__in=id_list)
+
+  
+  return render (request, 'meetings/meetings_index.html', {
+    'my_meetings': my_meetings,
+    'all_meetings': all_meetings,
+  })
