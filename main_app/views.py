@@ -106,3 +106,9 @@ def meetings_list(request):
     'non_joined_meetings': non_joined_meetings,
     'joined_meetings': joined_meetings,
   })
+
+@login_required
+def leave_meeting(request, meeting_id):
+    meeting = Meeting.objects.get(id=meeting_id)
+    meeting.players.remove(request.user.id)
+    return redirect('meetings_index')
