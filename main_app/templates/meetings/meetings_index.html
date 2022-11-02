@@ -12,8 +12,6 @@
     <h3>My Meetings</h3>
   </div>
 </div>
-
-<!-- Change button to 'leave meeting' -->
 <div class="row">
   <div class="col s4">
     {% for meeting in joined_meetings %}
@@ -55,9 +53,7 @@
     </a>
     {% endfor %}
   </div>
-
-<!-- Change buttons to be 'edit' and 'delete' -->
-  <div class="col s4">
+  <div class="col s4  meeting-list-page-buttons">
     {% for meeting in my_meetings %}
     <a href="{% url 'meetings_detail' meeting.id %}">
       <div class="card">
@@ -68,9 +64,13 @@
           <p>Location: {{ meeting.location }}</p>
           <p>Organizer: {{ meeting.organizer }}</p>
           <hr>
-          <form action="{% url 'join_meeting' meeting.id %}" method="POST">
+          <form action="{% url 'meeting_update' meeting.id %}" method="GET">
             {% csrf_token %}
-            <input type="submit" value="Join Meeting" class="btn">
+            <input type="submit" value="Edit" class="btn">
+          </form>
+          <form action="{% url 'meeting_delete' meeting.id %}" method="GET">
+            {% csrf_token %}
+            <input type="submit" value="Delete" class="btn">
           </form>
         </div>
       </div>
