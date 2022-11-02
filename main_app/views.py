@@ -68,6 +68,8 @@ class MeetingList(LoginRequiredMixin, ListView):
   model = Meeting
   fields = ['name', 'date', 'location', 'min_ppl', 'max_ppl']
 
+  # insert custom code to create and send a custom list of meetings that the user is a player in (also one that they're not in?)
+
 class MeetingDetail(LoginRequiredMixin, DetailView):
   model = Meeting
 
@@ -91,4 +93,9 @@ def create_meeting(request, game_id):
     new_meeting.game_id = game_id
     new_meeting.organizer_id = request.user.id
     new_meeting.save()
+  return redirect('meetings_index') # send to detail page if this works
+
+@login_required
+def join_meeting(request, meeting_id):
+  Meeting.objects.get(id=meeting_id).players.add(request.user.id)
   return redirect('meetings_index') # send to detail page if this works

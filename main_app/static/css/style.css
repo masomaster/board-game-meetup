@@ -35,11 +35,7 @@ h1, h3 {
     display: flex;
     justify-content: flex-end;
     margin-top: 40%;
-    /* margin-right: 20px; */
     text-align: right;
-    /* margin: 200px; */
-    /* width: 500px; */
-    /* align-items: center; */
     color: white;
 }
 
@@ -130,7 +126,20 @@ h1, h3 {
     margin-top: 0px;
     transform: rotate(-405deg);
 }
-  
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    color: #183A37;
+}
+
+.btn {
+    background-color: #183A37;
+}
+
+.btn:hover {
+    background-color: rgba(254, 218, 166, 1);
+    color: #183A37;
+}
+
 @media (max-width: 700px) {
 .menu-button-container {
       display: flex;
