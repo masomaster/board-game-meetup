@@ -25,10 +25,12 @@
       <div class='menu-button'></div>
     </label>
     <ul class="menu">
+      {% if user.is_authenticated %}
+        <li>Welcome {{user}}!</li>
+      {% endif %}
       <li><a href="/about">About</a></li>
       {% if user.is_authenticated %}
-        <li><a href="/games">View All My Games</a></li>
-        <li><a href="{% url 'games_create' %}">Add a Game</a></li>
+        <li><a href="/games">My Games</a></li>
         <li><a href="/meetings">Meetings</a></li>
         <li><a href="{% url 'logout' %}">Log Out</a></li>
       {% else %}
