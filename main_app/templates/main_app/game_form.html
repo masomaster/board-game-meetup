@@ -6,14 +6,12 @@
     {% else %}
     <h1>Add Game</h1>
     {% endif %}  
-    <div class="card">
-        <form action="" method="POST">
-            {% csrf_token %}
-            <table>
-                {{ form.as_table }}
-            </table>
-            <input type="submit" value="Submit!" class="btn">
-        </form>
-    </div>  
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit!" class="btn">
+    </form>
         
 {% endblock %}
