@@ -15,10 +15,12 @@
             <p>Minimum Players: {{ meeting.min_ppl }}</p>
             <p>Maximum Players: {{ meeting.max_ppl }}</p>
       </div>
-      <div class="card-action">
-        <a href="{% url 'meeting_update' meeting.id %}">Edit</a>
-        <a href="{% url 'meeting_delete' meeting.id %}">Delete</a>
-      </div>
+      {% if meeting.organizer == user %}
+        <div class="card-action">  
+            <a href="{% url 'meeting_update' meeting.id %}">Edit</a>
+            <a href="{% url 'meeting_delete' meeting.id %}">Delete</a>
+        </div>
+      {% endif %}
     </div>
   </div>
   <div class="col s6 col-offset-3">
