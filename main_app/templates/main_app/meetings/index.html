@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section id="mtg-index">
+  <div class="col s4" id="joined-title">
+    <h3>Joined Meetings</h3>
+  </div>
+  <div class="col s4" id="non-joined-title">
+    <h3>Non-Joined Meetings</h3>
+  </div>
+  <div class="col s4" id="my-mtgs-title">
+    <h3>My Meetings</h3>
+  </div>
+  <div class="col s4" id="joined-mtgs">
+    {% if joined_meetings.count %}
+      {% for meeting in joined_meetings %}
+      <a href="{% url 'meetings_detail' meeting.id %}">
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">{{ meeting.name }}</span>
+            <p>Game: {{ meeting.game.name }}</p>
+            <p>Date: {{ meeting.date }}</p>
+            <p>Location: {{ meeting.location }}</p>
+            <p>Organizer: {{ meeting.organizer }}</p>
+            <hr>
+            <form action="{% url 'leave_meeting' meeting.id %}" method="POST">
+              {% csrf_token %}
+              <input type="submit" value="Leave Meeting" class="btn">
+            </form>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    {% else %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">You haven't joined any Meetings yet</span>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  <div class="col s4" id="non-joined-mtgs">
+    {% for meeting in non_joined_meetings %}
+    <a href="{% url 'meetings_detail' meeting.id %}">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{ meeting.name }}</span>
+          <p>Game: {{ meeting.game.name }}</p>
+          <p>Date: {{ meeting.date }}</p>
+          <p>Location: {{ meeting.location }}</p>
+          <p>Organizer: {{ meeting.organizer }}</p>
+          <hr>
+          <form action="{% url 'join_meeting' meeting.id %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Join Meeting" class="btn">
+          </form>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  <div class="col s4  meeting-list-page-buttons" id="my-mtgs">
+    {% for meeting in my_meetings %}
+    <a href="{% url 'meetings_detail' meeting.id %}">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{ meeting.name }}</span>
+          <p>Game: {{ meeting.game.name }}</p>
+          <p>Date: {{ meeting.date }}</p>
+          <p>Location: {{ meeting.location }}</p>
+          <p>Organizer: {{ meeting.organizer }}</p>
+          <hr>
+          <form action="{% url 'meeting_update' meeting.id %}" method="GET">
+            {% csrf_token %}
+            <input type="submit" value="Edit" class="btn">
+          </form>
+          <form action="{% url 'meeting_delete' meeting.id %}" method="GET">
+            {% csrf_token %}
+            <input type="submit" value="Delete" class="btn">
+          </form>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
