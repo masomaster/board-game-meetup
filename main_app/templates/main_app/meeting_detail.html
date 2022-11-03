@@ -17,7 +17,11 @@
             <p>Players Attending:
             {% if meeting.players.count %}
               {% for player in meeting.players.all %}
-                {{ player }}, 
+                {% if not forloop.last %}
+                  {{ player }}, 
+                {% else %}
+                  {{ player }}
+                {% endif %}
               {% endfor %}
             {% endif %}
             </p>
