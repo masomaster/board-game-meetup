@@ -6,24 +6,24 @@
   {% else %}
     <h1>Add Meeting</h1>
   {% endif %}
-  <form action="" method="post">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit!" class="btn">
-  </form>
+    <form action="" method="post">
+      {% csrf_token %}
+      <table>
+        {{ form.as_table }}
+      </table>
+      <input type="submit" value="Submit!" class="btn">
+    </form>
 
-  <script>
-    const dateEl = document.getElementById('id_date');
-    M.Datepicker.init(dateEl, {
-      format: 'yyyy-mm-dd',
-      defaultDate: new Date(),
-      setDefaultDate: true,
-      autoClose: true
-    });
-  
-    const selectEl = document.getElementById('id_meal');
-    M.FormSelect.init(selectEl);
-  </script>
+    <script>
+      const dateEl = document.getElementById('id_date');
+      M.Datepicker.init(dateEl, {
+        format: 'yyyy-mm-dd',
+        defaultDate: new Date(),
+        setDefaultDate: true,
+        autoClose: true
+      });
+    
+      const selectEl = document.getElementById('id_meal');
+      M.FormSelect.init(selectEl);
+    </script>
 {% endblock %}

@@ -212,6 +212,8 @@ footer.page-footer {
     font-family: 'PT Sans', sans-serif;
 }  
 
+
+
 @media (max-width: 700px) {
     .menu-button-container {
         display: flex;
@@ -267,6 +269,14 @@ footer.page-footer {
             'my-mtgs-title'
             'my-mtgs';
     }
+}
+
+label {
+    color: white;
+}
+
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+    color: white;
 }
 
 @media (min-width: 1100px) {
