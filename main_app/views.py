@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import  CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Game, Meeting, Photo
+from .models import Game, Meeting, Photo, MeetingPhoto
 from main_app.forms import MeetingForm
 import uuid
 import boto3
@@ -116,6 +116,7 @@ def leave_meeting(request, meeting_id):
     meeting.players.remove(request.user.id)
     return redirect('meetings_index')
 
+@login_required
 def add_photo(request, game_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
@@ -131,17 +132,18 @@ def add_photo(request, game_id):
             print(e)
     return redirect('games_detail', game_id=game_id)
 
+@login_required
 def add_meeting_photo(request, meeting_id):
-    photo_file = request.FILES.get('photo-file', None)
-    if photo_file:
+    meeting_photo_file = request.FILES.get('meeting_photo-file', None)
+    if meeting_photo_file:
         s3 = boto3.client('s3')
-        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        key = uuid.uuid4().hex[:6] + meeting_photo_file.name[meeting_photo_file.name.rfind('.'):]
         try:
             bucket = os.environ['S3_BUCKET']
-            s3.upload_fileobj(photo_file, bucket, key)
+            s3.upload_fileobj(meeting_photo_file, bucket, key)
             url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-            Photo.objects.create(url=url, meeting_id=meeting_id)
+            MeetingPhoto.objects.create(url=url, meeting_id=meeting_id)
         except Exception as e:
             print('An error occurred uploading file to S3')
             print(e)
-    return redirect('meetings_detail', meeting_id=meeting_id)
+    return redirect('meetings_detail', pk=meeting_id)
