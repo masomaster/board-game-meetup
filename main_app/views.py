@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import  CreateView, UpdateView, DeleteView
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from main_app.forms import MeetingForm
@@ -64,12 +64,6 @@ class GameDelete(LoginRequiredMixin, DeleteView):
   model = Game
   success_url = '/games/'
 
-# class MeetingList(LoginRequiredMixin, ListView):
-#   model = Meeting
-
-
-  # insert custom code to create and send a custom list of meetings that the user is a player in (also one that they're not in?)
-
 class MeetingDetail(LoginRequiredMixin, DetailView):
   model = Meeting
 
@@ -84,21 +78,22 @@ class MeetingDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def create_meeting(request, game_id):
   form = MeetingForm(request.POST)
+  new_meeting = 0
   if form.is_valid():
     new_meeting = form.save(commit=False)
     new_meeting.game_id = game_id
     new_meeting.organizer_id = request.user.id
     new_meeting.save()
-  return redirect('meetings_index') # send to detail page if this works
+  return redirect('meetings_detail', 
+    pk = new_meeting.id)
 
 @login_required
 def join_meeting(request, meeting_id):
   Meeting.objects.get(id=meeting_id).players.add(request.user.id)
-  return redirect('meetings_index') # send to detail page if this works
+  return redirect('meetings_index')
 
 def meetings_list(request):
   my_meetings = Meeting.objects.filter(organizer=request.user)
-  # create available (non-joined) meetings 
   non_joined_meetings = Meeting.objects.exclude(players__id=request.user.id)
   joined_meetings = Meeting.objects.filter(players__id=request.user.id)  
   return render (request, 'meetings/meetings_index.html', {
