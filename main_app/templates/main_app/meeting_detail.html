@@ -44,10 +44,16 @@
   </div>  
 </div>
 <div class="row">
-      <!-- Need to add if statement to only show this button if user isn't already included in meeting.players -->
-  <form action="{% url 'join_meeting' meeting.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Join Meeting" class="btn">
-  </form>
+  {% if user in meeting.players.all %}
+    <form action="{% url 'leave_meeting' meeting.id %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="Leave Meeting" class="btn">
+    </form>
+  {% else %}
+    <form action="{% url 'join_meeting' meeting.id %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="Join Meeting" class="btn">
+    </form>
+  {% endif %}
 </div>
 {% endblock %}
