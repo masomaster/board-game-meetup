@@ -12,6 +12,9 @@
         <p>Difficulty Rating: {{ game.difficulty_rating }}</p>
         <p>Average Game Play: {{ game.avg_game_play }} minutes</p>
         <p>Description: {{ game.description }}</p>
+        {% if user == game.user %} <!-- Right now users can only ever see their own games, so this is irrelevant; do we want to change this feature? -->
+            <p>Private notes: {{ game.notes }}</p>
+        {% endif %}
     </div>
     <div class="card-action">
         <a href="{% url 'games_update' game.id %}">Edit</a>

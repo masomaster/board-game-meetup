@@ -46,11 +46,10 @@ def games_detail(request, game_id):
 class GameCreate(LoginRequiredMixin, CreateView):
   model = Game
   fields = [
-    'name', 'min_player', 'max_player', 'avg_game_play', 'difficulty_rating', 'genre', 'min_age', 'description'
+    'name', 'min_player', 'max_player', 'avg_game_play', 'difficulty_rating', 'genre', 'min_age', 'description', 'notes'
   ]
 
   def form_valid(self, form):
-    print('this got to view function')
     form.instance.user = self.request.user
     return super().form_valid(form)
 
@@ -84,6 +83,7 @@ def create_meeting(request, game_id):
     new_meeting.game_id = game_id
     new_meeting.organizer_id = request.user.id
     new_meeting.save()
+    new_meeting.players.add(request.user)
   return redirect('meetings_detail', 
     pk = new_meeting.id)
 
