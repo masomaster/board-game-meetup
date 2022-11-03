@@ -269,10 +269,18 @@ footer.page-footer {
     #welcome h1{
         font-size: 7em;
     }
+
+    #welcome {
+        margin-top: 30%;
+    }
 }
 
 @media (min-width: 1800px) {
     #welcome h1{
-        font-size: 9em;
+        font-size: 8em;
+    }
+
+    #welcome {
+        margin-top: 30%;
     }
 }
