@@ -67,6 +67,13 @@ class GameDelete(LoginRequiredMixin, DeleteView):
 class MeetingDetail(LoginRequiredMixin, DetailView):
   model = Meeting
 
+  def get_context_data(self, **kwargs):
+    context = super(MeetingDetail, self).get_context_data(**kwargs)
+    meeting = self.get_object()
+    players = meeting.players.all()
+    context['players'] = players
+    return context
+
 class MeetingUpdate(LoginRequiredMixin, UpdateView):
   model = Meeting
   fields = ['name', 'date', 'location', 'min_ppl', 'max_ppl']

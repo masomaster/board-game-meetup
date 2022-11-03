@@ -15,7 +15,11 @@
             <p>Minimum Players: {{ meeting.min_ppl }}</p>
             <p>Maximum Players: {{ meeting.max_ppl }}</p>
             <p>Players Attending:
-              {{ meeting.players }} <!-- Fix this! -->
+            {% if meeting.players.count %}
+              {% for player in meeting.players.all %}
+                {{ player }}, 
+              {% endfor %}
+            {% endif %}
             </p>
       </div>
       {% if meeting.organizer == user %}
