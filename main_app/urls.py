@@ -19,4 +19,5 @@ urlpatterns = [
     path('meetings/<int:meeting_id>/join_meeting', views.join_meeting, name="join_meeting"),
     path('meetings/<int:meeting_id>/leave_meeting', views.leave_meeting, name="leave_meeting"),
     path('games/<int:game_id>/add_photo/', views.add_photo, name='add_photo'),
+    path('meetings/<int:meeting_id>/add_meeting_photo/', views.add_meeting_photo, name='add_meeting_photo')
 ]
