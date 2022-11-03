@@ -13,6 +13,7 @@ class Game (models.Model):
     min_age = models.IntegerField(default=5)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=250, blank=True)
+    notes = models.TextField('Private notes (e.g., strategy, etc.)', max_length=250, blank=True)
 
     def __str__(self):
         return self.name
