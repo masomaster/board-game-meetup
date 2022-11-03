@@ -127,7 +127,7 @@ h1, h3 {
     transform: rotate(-405deg);
 }
 
-.container {
+#mtg-index {
     display: grid;
     grid-template-areas: 
         'joined-title non-joined-title my-mtgs-title'
@@ -236,7 +236,7 @@ footer.page-footer {
         border-bottom: 1px solid #444;
     }
 
-    .container {
+    #mtg-index {
         display: grid;
         grid-template-areas: 
             'joined-title'
@@ -245,5 +245,17 @@ footer.page-footer {
             'non-joined-mtgs'
             'my-mtgs-title'
             'my-mtgs';
+    }
+}
+
+@media (min-width: 1100px) {
+    #welcome h1{
+        font-size: 7em;
+    }
+}
+
+@media (min-width: 1800px) {
+    #welcome h1{
+        font-size: 9em;
     }
 }

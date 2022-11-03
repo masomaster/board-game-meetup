@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- <div class="row"> -->
+<section id="mtg-index">
   <div class="col s4" id="joined-title">
     <h3>Joined Meetings</h3>
   </div>
@@ -11,8 +11,6 @@
   <div class="col s4" id="my-mtgs-title">
     <h3>My Meetings</h3>
   </div>
-<!-- </div> -->
-<!-- <div class="row"> -->
   <div class="col s4" id="joined-mtgs">
     {% if joined_meetings.count %}
       {% for meeting in joined_meetings %}
@@ -85,6 +83,5 @@
     </a>
     {% endfor %}
   </div>
-<!-- </div> -->
-
+</section>
 {% endblock %}
