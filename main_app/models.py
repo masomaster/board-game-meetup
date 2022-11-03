@@ -29,7 +29,7 @@ class Meeting(models.Model):
     max_ppl = models.IntegerField('Maximum # of players')
     game = models.ForeignKey(Game, on_delete=models.CASCADE, null=True)
     organizer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_created", null=True)
-    players = models.ManyToManyField(User, related_name="user_playing") # on form, automatically assign creator to this join table AND allow other users to click a "join" button that will add them to this join table
+    players = models.ManyToManyField(User, related_name="user_playing")
 
     def __str__(self):
         return f"{self.name} on {self.date}"
