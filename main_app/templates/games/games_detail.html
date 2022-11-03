@@ -20,7 +20,20 @@
         <a href="{% url 'games_update' game.id %}">Edit</a>
         <a href="{% url 'games_delete' game.id %}">Delete</a>
     </div>
-</div>  
+</div> 
+
+{% for photo in cat.photo_set.all %}
+<img class="responsive-img card-panel" src="{{photo.url}}">
+{% empty %}
+<div class="card-panel teal-text center-align">No Photos Uploaded</div>
+{% endfor %}
+<form action="{% url 'add_photo' game.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+    {% csrf_token %}
+    <input type="file" name="photo-file">
+    <br><br>
+    <input type="submit" class="btn" value="Upload Photo">
+</form>
+
 <h3>Creating a Meeting for {{ game.name }}</h3>
 <div class="card">
     <div class="card-content">

@@ -6,10 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import  CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from .models import Game, Meeting, Photo
 from main_app.forms import MeetingForm
-
-from .models import Game, Meeting
+import uuid
+import boto3
+import os
 
 # Create your views here.
 def home(request):
@@ -107,3 +108,23 @@ def leave_meeting(request, meeting_id):
     meeting = Meeting.objects.get(id=meeting_id)
     meeting.players.remove(request.user.id)
     return redirect('meetings_index')
+
+def add_photo(request, game_id):
+    # photo-file will be the "name" attribute on the <input type="file">
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        # need a unique "key" for S3 / needs image file extension too
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        # just in case something goes wrong
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+            # build the full url string
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            # we can assign to cat_id or cat (if you have a cat object)
+            Photo.objects.create(url=url, game_id=game_id)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
+    return redirect('games_detail', game_id=game_id)
