@@ -18,4 +18,5 @@ urlpatterns = [
     path('meetings/<int:pk>/delete/', views.MeetingDelete.as_view(), name='meeting_delete'),
     path('meetings/<int:meeting_id>/join_meeting', views.join_meeting, name="join_meeting"),
     path('meetings/<int:meeting_id>/leave_meeting', views.leave_meeting, name="leave_meeting"),
+    path('games/<int:game_id>/add_photo/', views.add_photo, name='add_photo'),
 ]
