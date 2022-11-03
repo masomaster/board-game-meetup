@@ -21,3 +21,12 @@ https://lucid.app/lucidchart/7e227f2d-a138-4e8c-bbd5-36ddcdc1868a/edit?invitatio
 
 
 # IceBox Features
+- Implement a User profile, including about section, and picture.
+- A search function with a filter for the games list page.
+- Ability to add other users as friends.
+- Message boards for users to discuss games on.
+- Invite friends to meetings.
+- Add a "like" button for friends games.
+- Ability to leave reviews on games.
+- Add a game wish list.
+- Add a Google map to Meetings for location.
