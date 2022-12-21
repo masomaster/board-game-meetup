@@ -83,7 +83,11 @@ WSGI_APPLICATION = 'boardgamemeetup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'board-games',
+        'NAME': 'masomaster/trial',
+        'USER': 'masomaster',
+        'PASSWORD': 'v2_3xA8W_2w8VVS2R7jWBAzmUJVMAZ3r',
+        'HOST': 'db.bit.io',
+        'PORT': '5432',
     }
 }
 
