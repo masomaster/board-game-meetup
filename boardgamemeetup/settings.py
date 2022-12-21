@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import django_on_heroku
 from pathlib import Path
 
 import environ
+import os
 
 environ.Env()
 environ.Env.read_env()
@@ -83,7 +85,11 @@ WSGI_APPLICATION = 'boardgamemeetup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'board-games',
+        'NAME': os.environ['BITIO_DB_NAME'],
+        'USER': os.environ['BITIO_DB_USER'],
+        'PASSWORD': os.environ['BITIO_DB_PASSWORD'],
+        'HOST': 'db.bit.io',
+        'PORT': '5432',
     }
 }
 
@@ -124,14 +130,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-LOGIN_REDIRECT_URL='/'
+LOGIN_REDIRECT_URL = '/'
 
-LOGOUT_REDIRECT_URL='/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import django_on_heroku
 django_on_heroku.settings(locals())
